@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{./include/baseLayout :: setContent( ~{ ::.wrap } ) }">
+
+    <div class="wrap">
+        <div class="warp_inner">
+            <div class="right_content">
+                <div class="midiaq">
+                    <div class="mainWrapper">
+                        <div class="ipssGiudeBlock" style="color:red; font-size: large;">
+                            -요구사항<br>
+                            -회원은 글을 등록 할 수 있습니다<br>
+                        </div>
+                    </div>
+                    <div class="page_title">게시글 연습 > 글 등록</div>
+
+                    <form action="registForm" method="post" name="topicForm">
+                        <div class="full_collum collum">
+                            <ul>
+                                <li class="collum_tit">
+                                    <h2>게시글관리</h2>
+
+                                    <span class="showtoggle minus"></span>
+                                    <ul>
+                                        <li>
+                                            <table cellpadding="0" cellspacing="0" class="board_basic_view"
+                                                   width="100%;">
+                                                <tr>
+                                                    <th>등록일</th>
+                                                    <td colspan="5">
+                                                        <input class="datepicker" disabled
+                                                               name="displayDate"
+                                                               readonly th:value="${#temporals.format(topicRegdate, 'yyyy-MM-dd')}" type="text">
+                                                        <input name="topicRegdate" th:value="${#temporals.format(topicRegdate, 'yyyy-MM-dd\'\'T\'\'HH:mm:ss')}"
+                                                               type="hidden"/>
+
+
+                                                    </td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <th>아이디</th>
+                                                    <td><input class="inputw150" name="topicWriter" readonly
+                                                               th:value="${topicWriter}"
+                                                               type="text"></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th>제목</th>
+                                                    <td colspan="5"><input class="inputw99p" name="topicTitle"
+                                                                           type="text">
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th>내용</th>
+                                                    <td colspan="5">
+                                                        <div><textarea class="inputw99p" name="topicContent"
+                                                                       style="height: 200px;"></textarea>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                            <div class="btn_area">
+                                                <input class="save" type="submit" value="등록">
+                                                <input class="delete" onclick="location.href='topicListAll';" type="button"
+                                                       value="목록">
+                                                <!-- 
+                                                <a href="#" class="save">등록</a>
+                                                <a href="#" class="delete">목록</a>
+                                                <a href="#" class="revise mglr13">삭제</a> 
+                                                -->
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+
+
+                </div>
+                <!-- right_content end -->
+            </div>
+
+
+            <!-- warp_inner end -->
+            <div class="dim_layer">
+
+            </div>
+            <!-- wrap end -->
+        </div>
+
+
+    </div>
+</th:block>
+
+
+</html>
