@@ -186,7 +186,12 @@
         )
     </insert>
 
-
+    <!-- 파일 데이터 조회-->
+    <select id="getImgs" resultType="ProductUploadVO">
+        SELECT *
+        FROM PRODUCT_UPLOAD
+        WHERE PROD_ID = #{prodId}
+    </select>
 
 
 

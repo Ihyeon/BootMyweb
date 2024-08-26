@@ -34,7 +34,7 @@
 
                                                     <td colspan="5">
                                                         <div>수정이 불가능한 옵션입니다(상품관리자에게 문의하세요)</div>
-                                                    [[${vo.categoryNav}]]
+                                                        [[${vo.categoryNav}]]
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -50,43 +50,53 @@
                                                 <tr>
                                                     <th>메인사진</th>
                                                     <td colspan="3">
+
+
+                                                        <!--
+                                                        src 경로에는 컨트롤러의 요청경로를 적음
+                                                        컨트롤러에서느 이미지 byte코드를 구해서 응답.
+                                                        -->
+
                                                         <!--미리보기 폼-->
                                                         <div class="blockContent">
                                                             <div class="productText">이미지 수정은 목록을 이용해주세요</div>
                                                             <div class="productImg">
-                                                                <div class="imgItem">
-                                                                    <span class="imgKind">대표이미지</span>
+
+                                                                <div class="imgItem" th:each="vo : ${imgs}">
+                                                                    <span class="imgKind"><a th:href="@{/download/{filepath}/{uuid}/{filename}(filepath=${vo.filepath}, uuid=${vo.uuid}, filename=${vo.filename} )}" download>다운로드</a></span>
                                                                     <div class="imgWrap">
                                                                         <div class="imgArea">
-                                                                            <img src="../img/item_main.jpg">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="imgItem">
-                                                                    <span class="imgKind">배너이미지</span>
-                                                                    <div class="imgWrap">
-                                                                        <div class="imgArea">
-                                                                            <img src="../img/item_banner.jpg">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="imgItem">
-                                                                    <span class="imgKind">배너이미지</span>
-                                                                    <div class="imgWrap">
-                                                                        <div class="imgArea">
-                                                                            <img src="../img/item_banner.jpg">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="imgItem">
-                                                                    <span class="imgKind">배너이미지</span>
-                                                                    <div class="imgWrap">
-                                                                        <div class="imgArea">
-                                                                            <img src="../img/item_banner.jpg">
+                                                                            <img th:src="@{/display/{filepath}/{uuid}/{filename}(filepath=${vo.filepath}, uuid=${vo.uuid}, filename=${vo.filename} )}">
                                                                         </div>
                                                                     </div>
                                                                 </div>
 
+                                                                <!--
+                                                                <div class="imgItem">
+                                                                    <span class="imgKind">배너이미지</span>
+                                                                    <div class="imgWrap">
+                                                                        <div class="imgArea">
+                                                                            <img src="../img/item_banner.jpg">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="imgItem">
+                                                                    <span class="imgKind">배너이미지</span>
+                                                                    <div class="imgWrap">
+                                                                        <div class="imgArea">
+                                                                            <img src="../img/item_banner.jpg">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="imgItem">
+                                                                    <span class="imgKind">배너이미지</span>
+                                                                    <div class="imgWrap">
+                                                                        <div class="imgArea">
+                                                                            <img src="../img/item_banner.jpg">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                -->
                                                             </div>
                                                         </div>
                                                     </td>
@@ -178,14 +188,15 @@
 
 <!--이 화면에서 사용할 JS-->
 <script th:inline="javascript">
+
     var msg = '[[${msg}]]';
 
 
-    // 사용자가 back 버튼으로 돌아왔을 때 history.state가 변경되었으면 메세지가 출력되지 않음
-    if(msg != 'null' && history.state == null) { //msg가 null 이 아니라는 것은 msg값이 있다는 뜻
+    //사용자가 back버튼으로 돌아왔을 때 history.state가 변경되었으면, 메시지가 출력되지 않음.
+    if(msg != 'null' && history.state == null  ) { //msg가 null 이 아니라는 것은 msg값이 있다는 뜻
         var m = JSON.parse(msg);
         alert(m);
-        history.replaceState('back', '', null); // 현재 브라우저 (추가할 데이터, 제목, url)
+        history.replaceState('back', '', null); //현재 브라우저 (추가할데이터, 제목, url)
     }
 
 </script>
@@ -206,13 +217,13 @@
     del.onclick = function() {
         event.preventDefault(); //a 기본이벤트 중단
 
-        if(confirm("삭제하면 복구가 불가능합니다. 그래도 삭제하시겠습니까?")) {
-
+        if(confirm("삭제하면 복구가 불가능 합니다. 그래도 삭제하시겠습니까?")) {
             document.actionForm.action = "productDelete";
             document.actionForm.submit(); //서브밋
         }
 
     }
+
 
 
 </script>

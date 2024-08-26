@@ -20,11 +20,15 @@ public interface ProductMapper {
     public int productUpdate(ProductVO vo); //수정
     public void productDelete(int prodId); //삭제
 
-    //카테고리 1단계
+    // 카테고리 1단계
     public ArrayList<CategoryVO> getCategory();
-    //카테고리 2,3단계
+    // 카테고리 2,3단계
     public ArrayList<CategoryVO> getCategoryChild(CategoryVO vo);
 
     // 파일 데이터 인서트
     public void uploadFile(ProductUploadVO vo);
+
+    // 파일 데이터 조회
+    public ArrayList<ProductUploadVO> getImgs(int prodId);
+
 }
